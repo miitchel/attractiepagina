@@ -25,20 +25,16 @@ require_once 'admin/backend/config.php';
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia modi dolore magnam! Iste libero voluptatum autem, sapiente ullam earum nostrum sed magnam vel laboriosam quibusdam, officia, esse vitae dignissimos nulla?
         </aside>
         <main>
-            <div class="attracties-grid">
-                <div class="attractie">
-                    <div class="attractie-image">
-                        <img src="img/attracties/adger-kang-oiyzr-SgjBY-unsplash.jpg" alt="">
-                    </div>
-                    <div class="attractie-beschrijving">
-                        <p>ADVENTURELAND</p>
-                        <h1>Speedy XL</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, praesentium numquam cum doloribus dolores dolorum, atque sit non qui rem. Saepe exercitationem, cumque dolorum inventore soluta ipsa, illum ea tempora!</p>
-                        <p>120cm minimale lengte</p>
-                    </div>
+            <?php
+                require_once 'admin/backend/conn.php';
+                $query = "SELECT * FROM rides";
+                $statement = $conn->prepare($query);
+                $statement->execute();
+                $attracties = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                </div>
-            </div>
+                print_r($attracties);
+            ?>
+
         </main>
     </div>
 
