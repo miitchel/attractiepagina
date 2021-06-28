@@ -32,26 +32,31 @@ if(!isset($_SESSION['user_id']))
 
         <?php
         require_once '../backend/conn.php';
-        $query = "SELECT * FROM rides";
+        $query = "SELECT * FROM rides ORDER BY title";
         $statement = $conn->prepare($query);
         $statement->execute();
-        $rides = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $attracties = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
+        <p>Aantal attracties: <strong>
+                <?php echo count($attracties) ?>
+            </strong></p>
         <table>
             <tr>
                 <th>Titel</th>
                 <th>Themagebied</th>
+                <th>Beschrijving</th>
                 <th>Min. lengte</th>
                 <th>Fastpass</th>
             </tr>
-            <?php foreach($rides as $ride): ?>
+            <?php foreach($attracties as $attractie): ?>
                 <tr>
-                    <td><?php echo $ride['title']; ?></td>
-                    <td><?php echo $ride['themeland']; ?></td>
-                    <td><?php echo $ride['min_length']; ?></td>
-                    <td><?php echo $ride['fast_pass']; ?></td>
-                    <td><a href="edit.php?id=<?php echo $ride['id']; ?>">aanpassen</a></td>
+                    <td><?php echo $attractie['title']; ?></td>
+                    <td><?php echo ucfirst($attractie['themeland']); ?></td>
+                    <td><?php echo $attractie['description']?></td>
+                    <td><?php echo $attractie['min_length']; ?></td>
+                    <td><?php if ($attractie['fast_pass']) echo "Ja"; else echo "Nee"; ?></td>
+                    <td><a href="edit.php?id=<?php echo $attractie['id']; ?>">aanpassen</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>

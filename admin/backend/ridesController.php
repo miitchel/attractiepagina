@@ -19,10 +19,20 @@ if($action == 'create')
     }
 
     $themeland = $_POST['themeland'];
+
     if(empty($themeland))
     {
         $errors[] = "Vul een themagebied in!";
     }
+
+    $description = $_POST['description'];
+    
+    if(empty($description))
+    {
+        $errors[] = "Vul een beschrijving in!";
+    }
+
+    $min_length = $_POST['min-length'];
 
     if(isset($_POST['fast_pass']))
     {
@@ -52,11 +62,13 @@ if($action == 'create')
 
     //Query
     require_once 'conn.php';
-    $query = "INSERT INTO rides (title, themeland, fast_pass, img_file) VALUES(:title, :themeland, :fast_pass, :img_file)";
+    $query = "INSERT INTO rides (title, themeland, description, min_length, fast_pass, img_file) VALUES(:title, :themeland, :description, :min_length, :fast_pass, :img_file)";
     $statement = $conn->prepare($query);
     $statement->execute([
         ":title" => $title,
         ":themeland" => $themeland,
+        ":description" => $description,
+        ":min_length" => $min_length,
         ":fast_pass" => $fast_pass,
         ":img_file" => $target_file,
     ]);
@@ -69,7 +81,24 @@ if($action == "update")
 {
     $id = $_POST['id'];
     $title = $_POST['title'];
+    if(empty($title))
+    {
+        $errors[] = "Vul een titel in!";
+    }
+
     $themeland = $_POST['themeland'];
+    if(empty($themeland))
+    {
+        $errors[] = "Vul een themagebied in!";
+    }
+
+    $description = $_POST['description'];
+    if(empty($description))
+    {
+        $errors[] = "Vul een beschrijving in!";
+    }
+    
+    $min_length = $_POST['min-length'];
     if(isset($_POST['fast_pass']))
     {
         $fast_pass = true;

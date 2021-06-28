@@ -152,6 +152,47 @@ header h1{
     text-shadow: 0 0 7px black;
 }
 
+/* GRID */.attracties {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: dense;
+  grid-gap: 10px;
+}
+
+.attractie img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.fast-pass{
+  background-color: white;
+}
+
+.attractie-info {
+  padding: 10px;
+}
+
+.large .attractie-info .fast-pass {
+  width: 50%;
+}
+
+.large {
+  grid-column: span 2;
+}
+
+@media only screen and (max-width: 1200px) {
+  .attracties{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container.content {
+    display: block;
+  }
+}
+
 /* FORMS */
 .form-group{
     margin: 1rem 0;
@@ -177,7 +218,9 @@ th{
     text-align: left;
 }
 
-
+table tr:nth-child(even){
+    background-color: #4C8BF5;
+}
 
 
 

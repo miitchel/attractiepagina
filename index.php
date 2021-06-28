@@ -31,9 +31,20 @@ require_once 'admin/backend/config.php';
                 $statement = $conn->prepare($query);
                 $statement->execute();
                 $attracties = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                print_r($attracties);
             ?>
+            <div class="attracties">
+                <?php foreach ($attracties as $attractie): ?>
+                    <div class="attractie <?php if ($attractie['fast_pass']) echo "large"; ?>">
+                        <img src="img/attracties/<?php echo $attractie['img_file']; ?>" alt="<?php echo $attractie['title']; ?>">
+                        <div class="attractie-info">
+                            <p class="themeland"><?php echo $attractie['themeland'] ?></p>
+                            <h2><?php echo $attractie['title']; ?></h2>
+                            <p class="description"><?php echo $attractie['description']; ?></p>
+                            <p class="min-length"><span><?php echo $attractie['min_length']; ?>cm</span> minimale lengte</p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
 
         </main>
     </div>
